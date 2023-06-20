@@ -28,7 +28,10 @@ class Themes {
       primary: Color(0xffFFFFFF),
       onBackground: Color(0xff000000).withOpacity(.6),
     ),
-    inputDecorationTheme: const InputDecorationTheme(border: InputBorder.none),
+    inputDecorationTheme: const InputDecorationTheme(
+      border: InputBorder.none,
+      suffixIconColor: Colors.black,
+    ),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: Colors.white.withOpacity(.6),
       contentTextStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 15),
@@ -36,11 +39,11 @@ class Themes {
   );
 
   final darkTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: Colors.grey.withOpacity(0.2),
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.grey.withOpacity(0.2),
+    scaffoldBackgroundColor: Colors.black,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.black,
       elevation: 0,
-      iconTheme: const IconThemeData(
+      iconTheme: IconThemeData(
         color: Colors.white,
       ),
     ),
@@ -53,8 +56,8 @@ class Themes {
       ),
     ),
     colorScheme: ColorScheme.light(
-      primary: const Color(0xffFFFFFF).withOpacity(.6),
-      onBackground: const Color(0xffFFFFFF).withOpacity(.6),
+      primary: Color.fromARGB(255, 43, 43, 43),
+      onBackground: const Color(0xffFFFFFF).withOpacity(.7),
     ),
     textTheme: const TextTheme(
       displaySmall: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15),
@@ -64,10 +67,11 @@ class Themes {
     ),
     inputDecorationTheme: const InputDecorationTheme(
       border: InputBorder.none,
+      suffixIconColor: Colors.white,
     ),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: Colors.white.withOpacity(.6),
-      contentTextStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 15),
+      contentTextStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15),
     ),
   );
 }

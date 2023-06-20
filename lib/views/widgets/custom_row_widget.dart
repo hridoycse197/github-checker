@@ -13,12 +13,22 @@ class customRowElementWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        icon,
-        Spacehorizontal(horizontal: 7),
-        CustomTextWidget(
-          text: title,
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
+        Expanded(
+          flex: 1,
+          child: Row(
+            children: [
+              icon,
+              Spacehorizontal(horizontal: 7),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 7,
+          child: CustomTextWidget(
+            text: title,
+            fontSize: 15,
+            fontWeight: FontWeight.normal,
+          ),
         ),
       ],
     );
