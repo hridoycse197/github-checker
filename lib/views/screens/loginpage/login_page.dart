@@ -1,40 +1,70 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:inilabstask/utils/themeservices.dart';
+import 'package:inilabstask/controller/data_controller.dart';
+import 'package:inilabstask/services/themeservices.dart';
 
 import '../../widgets/custom_space_widget.dart';
+import '../../widgets/custom_text_widget.dart';
 
 class LoginPage extends StatelessWidget {
+  final dataC = Get.put(DataController());
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        actions: [Icon(Icons.light_mode)],
+        actions: [
+          GestureDetector(
+              onTap: () {
+                Themeservices().ChangeThemeMode();
+              },
+              child: const Icon(Icons.light_mode)),
+          Spacehorizontal(horizontal: 20)
+        ],
       ),
       body: SafeArea(
           child: Center(
-        child: Column(
+              child: Obx(
+        () => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Themeservices().isSavedDarkMode() ? Image.asset('assets/light.gif') : Image.asset('assets/light.gif'),
+            Spacevertical(vertical: 20),
             Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              width: Get.width * .4,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+              width: Get.width * .9,
               height: 50,
-              child: TextFormField(),
+              padding: const EdgeInsets.only(left: 4),
+              child: TextFormField(
+                onChanged: dataC.onChanged,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.displaySmall!.color,
+                ),
+              ),
             ),
-            ElevatedButton.icon(
-                onPressed: () {
-                  Themeservices().ChangeThemeMode();
-                },
-                icon: Icon(Icons.login),
-                label: Text('Login')),
-            Spacehorizontal(
-              horizontal: 10,
-            )
+            Spacevertical(vertical: 20),
+            dataC.loginLoading.value
+                ? CircularProgressIndicator(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  )
+                : ElevatedButton.icon(
+                    onPressed: () {
+                      if (dataC.onChanged != '') {
+                        dataC.submitUser(dataC.onChanged.value);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: CustomTextWidget(text: 'Please Type username')));
+                      }
+                    },
+                    icon: const Icon(Icons.login),
+                    label: CustomTextWidget(text: 'Login')),
           ],
         ),
-      )),
+      ))),
     );
   }
 }
