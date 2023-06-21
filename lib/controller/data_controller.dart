@@ -14,6 +14,7 @@ class DataController extends GetxController {
   final isReveresd = RxBool(false);
   final userDetails = Rx<UserDetailsModel?>(null);
   final repositoryList = RxList<RepositoryModel>([]);
+  final selectedRepository = Rx<RepositoryModel?>(null);
   final items = RxList<String>([
     'By Name',
     'By Updated At',
@@ -33,6 +34,57 @@ class DataController extends GetxController {
         (a, b) => a.updatedAt!.compareTo(b.updatedAt!),
       );
       repositorySearchedList.addAll(repositoryList);
+    }
+  }
+
+  String proceseddate({required String dates}) {
+    if (dates != '') {
+      String year = dates.split('-')[0];
+      String month = dates.split('-')[1];
+      String date = dates.split('-')[2];
+      String convertedMonth = '';
+      switch (month) {
+        case '01':
+          convertedMonth = 'January';
+          break;
+        case '02':
+          convertedMonth = 'February';
+          break;
+        case '03':
+          convertedMonth = 'March';
+          break;
+        case '04':
+          convertedMonth = 'April';
+          break;
+        case '05':
+          convertedMonth = 'May';
+          break;
+        case '06':
+          convertedMonth = 'June';
+          break;
+        case '07':
+          convertedMonth = 'July';
+          break;
+        case '08':
+          convertedMonth = 'August';
+          break;
+        case '09':
+          convertedMonth = 'September';
+          break;
+        case '10':
+          convertedMonth = 'October';
+          break;
+        case '11':
+          convertedMonth = 'November';
+          break;
+        case '12':
+          convertedMonth = 'December';
+          break;
+        default:
+      }
+      return '${date} ${convertedMonth} ${year}';
+    } else {
+      return 'N/A';
     }
   }
 

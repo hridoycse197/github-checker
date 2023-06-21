@@ -10,6 +10,7 @@ import '../../widgets/custom_text_widget.dart';
 
 class LoginPage extends StatelessWidget {
   final dataC = Get.put(DataController());
+  TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -40,7 +41,7 @@ class LoginPage extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(topRight: Radius.circular(500)),
+                          borderRadius: const BorderRadius.only(topRight: Radius.circular(500)),
                           color: Theme.of(context).colorScheme.background,
                         ),
                         child: Padding(
@@ -51,7 +52,10 @@ class LoginPage extends StatelessWidget {
 
                               //mainAxisAlignment: MainAxisAlignment.start,
 
-                              Themeservices().isSavedDarkMode() ? Image.asset('assets/light.gif') : Image.asset('assets/dark.gif'),
+                              Image.asset(
+                                'assets/github_logo-.png',
+                                height: 100,
+                              ),
                             ],
                           ),
                         ),
@@ -70,14 +74,16 @@ class LoginPage extends StatelessWidget {
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.background,
-                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(500)),
+                              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(500)),
                             ),
                             child: Column(
                               children: [
                                 Spacevertical(vertical: 100),
                                 Container(
                                   decoration: BoxDecoration(
-                                    boxShadow: [BoxShadow(color: Colors.grey, spreadRadius: 1, blurRadius: 5, offset: Offset(1, 2))],
+                                    boxShadow: const [
+                                      BoxShadow(color: Colors.grey, spreadRadius: 1, blurRadius: 5, offset: Offset(1, 2))
+                                    ],
                                     //  borderRadius: BorderRadius.circular(10),
                                     color: Theme.of(context).colorScheme.onBackground,
                                   ),
@@ -85,6 +91,9 @@ class LoginPage extends StatelessWidget {
                                   height: 50,
                                   padding: const EdgeInsets.only(left: 4),
                                   child: TextFormField(
+                                    controller: textEditingController,
+                                    cursorColor: Colors.black,
+                                    decoration: const InputDecoration(hintText: 'Enter github username'),
                                     onChanged: dataC.onChanged,
                                     style: TextStyle(
                                       color: Theme.of(context).textTheme.displaySmall!.color,
@@ -104,6 +113,7 @@ class LoginPage extends StatelessWidget {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(SnackBar(content: CustomTextWidget(text: 'Please Type username')));
                                           }
+                                          textEditingController.clear();
                                         },
                                         icon: const Icon(Icons.login),
                                         label: CustomTextWidget(text: 'Login')),

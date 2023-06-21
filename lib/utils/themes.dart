@@ -37,10 +37,10 @@ class Themes {
       onPrimary: Color(0xff447381),
       onSecondary: Colors.white,
     ),
-    inputDecorationTheme: const InputDecorationTheme(
-      border: InputBorder.none,
-      suffixIconColor: Colors.black,
-    ),
+    inputDecorationTheme:
+        const InputDecorationTheme(border: InputBorder.none, 
+        suffixIconColor: Colors.black, 
+        hintStyle: TextStyle(color: Colors.black),),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: Colors.white.withOpacity(.6),
       contentTextStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 15),
@@ -71,7 +71,7 @@ class Themes {
       primary: const Color(0xffFFFFFF),
       onBackground: Colors.white.withOpacity(.8),
       background: Colors.black.withOpacity(0.8),
-      onSecondary: Colors.black.withOpacity(0.6),
+      onSecondary: Colors.black,
       onPrimary: Colors.white.withOpacity(.8),
     ),
     textTheme: TextTheme(
@@ -82,10 +82,8 @@ class Themes {
     iconTheme: const IconThemeData(
       color: Colors.black,
     ),
-    inputDecorationTheme: const InputDecorationTheme(
-      border: InputBorder.none,
-      suffixIconColor: Colors.white,
-    ),
+    inputDecorationTheme:
+        const InputDecorationTheme(border: InputBorder.none, suffixIconColor: Colors.black, hintStyle: TextStyle(color: Colors.black)),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: Colors.white.withOpacity(.6),
       contentTextStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15),

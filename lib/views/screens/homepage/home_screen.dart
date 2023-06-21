@@ -9,6 +9,7 @@ import '../../widgets/custom_divider.dart';
 import '../../widgets/custom_row_widget.dart';
 import '../../widgets/custom_space_widget.dart';
 import '../../widgets/custom_text_widget.dart';
+import '../loginpage/login_page.dart';
 import 'widgets/grid_widget.dart';
 import 'widgets/list_widget.dart';
 
@@ -85,6 +86,12 @@ class HomePage extends StatelessWidget {
                                       Themeservices().changeThemeMode();
                                     },
                                     child: const Icon(Icons.light_mode)),
+                                Spacehorizontal(horizontal: 10),
+                                GestureDetector(
+                                    onTap: () {
+                                      Get.offAll(() => LoginPage());
+                                    },
+                                    child: const Icon(Icons.logout_outlined)),
                                 Spacehorizontal(horizontal: 10)
                               ],
                             ),
@@ -134,14 +141,14 @@ class HomePage extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     CustomTextWidget2(
-                                      text: dataC.userDetails.value!.name ?? "N?A",
+                                      text: dataC.userDetails.value!.name ?? "N/A",
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                     Spacevertical(vertical: 5),
-                                    CustomTextWidget2(text: dataC.userDetails.value!.location ?? "N?A"),
+                                    CustomTextWidget2(text: dataC.userDetails.value!.location ?? "N/A"),
                                     Spacevertical(vertical: 5),
-                                    CustomTextWidget2(text: dataC.userDetails.value!.bio ?? "N?A"),
+                                    CustomTextWidget2(text: dataC.userDetails.value!.bio ?? "N/A"),
                                     Spacevertical(vertical: 18),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
