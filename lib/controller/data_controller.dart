@@ -11,10 +11,35 @@ class DataController extends GetxController {
   final onChanged = RxString('');
   final loginLoading = RxBool(false);
   final isgridView = RxBool(false);
+  final isReveresd = RxBool(false);
   final userDetails = Rx<UserDetailsModel?>(null);
   final repositoryList = RxList<RepositoryModel>([]);
+  final items = RxList<String>([
+    'By Name',
+    'By Updated At',
+  ]);
 
   final repositorySearchedList = RxList<RepositoryModel>([]);
+  choiceAction(String choice) {
+    if (choice == 'By Name') {
+      repositorySearchedList.clear();
+      repositoryList.sort(
+        (a, b) => a.name!.toLowerCase().compareTo(b.name!.toLowerCase()),
+      );
+      repositorySearchedList.addAll(repositoryList);
+    } else if (choice == 'By Updated At') {
+      repositorySearchedList.clear();
+      repositoryList.sort(
+        (a, b) => a.updatedAt!.compareTo(b.updatedAt!),
+      );
+      repositorySearchedList.addAll(repositoryList);
+    }
+  }
+
+  List<RepositoryModel> returnFilteredList() {
+    return repositoryList;
+  }
+
   Future<void> submitUser(String username) async {
     loginLoading.value = true;
     try {

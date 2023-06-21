@@ -1,32 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Themes {
   final lightTheme = ThemeData.light().copyWith(
     textTheme: const TextTheme(
+      bodySmall: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 15),
       displaySmall: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 15),
+      displayMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 22),
     ),
-    scaffoldBackgroundColor: Colors.purple[100],
+    scaffoldBackgroundColor: const Color(0xff447381),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
+        minimumSize: MaterialStateProperty.all(Size(Get.width * .4, 45)),
         iconColor: MaterialStateProperty.all(
           Colors.black,
         ),
-        backgroundColor: MaterialStateProperty.all(Colors.greenAccent),
+        backgroundColor: MaterialStateProperty.all(
+          Colors.white,
+        ),
       ),
     ),
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.purple[100],
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.white,
       elevation: 0,
-      iconTheme: const IconThemeData(
+      iconTheme: IconThemeData(
         color: Colors.black,
       ),
     ),
     iconTheme: const IconThemeData(
       color: Colors.black,
     ),
-    colorScheme: ColorScheme.light(
-      primary: Color(0xffFFFFFF),
-      onBackground: Color(0xff000000).withOpacity(.6),
+    colorScheme: const ColorScheme.light(
+      background: Color(0xff447381),
+      primary: Colors.white,
+      onBackground: Colors.white,
+      onPrimary: Color(0xff447381),
+      onSecondary: Colors.white,
     ),
     inputDecorationTheme: const InputDecorationTheme(
       border: InputBorder.none,
@@ -34,36 +43,44 @@ class Themes {
     ),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: Colors.white.withOpacity(.6),
-      contentTextStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 15),
+      contentTextStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal, fontSize: 15),
     ),
   );
 
   final darkTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: Colors.black,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.black,
+    scaffoldBackgroundColor: Colors.black.withOpacity(.9),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.black.withOpacity(0.6),
       elevation: 0,
-      iconTheme: IconThemeData(
-        color: Colors.white,
+      iconTheme: const IconThemeData(
+        color: Colors.black,
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        iconColor: MaterialStateProperty.all(Colors.white),
+        minimumSize: MaterialStateProperty.all(Size(Get.width * .4, 45)),
+        iconColor: MaterialStateProperty.all(
+          Colors.black.withOpacity(0.8),
+        ),
         backgroundColor: MaterialStateProperty.all(
-          const Color(0xffFFFFFF).withOpacity(.6),
+          Colors.white,
         ),
       ),
     ),
     colorScheme: ColorScheme.light(
-      primary: Color.fromARGB(255, 43, 43, 43),
-      onBackground: const Color(0xffFFFFFF).withOpacity(.7),
+      primary: const Color(0xffFFFFFF),
+      onBackground: Colors.white.withOpacity(.8),
+      background: Colors.black.withOpacity(0.8),
+      onSecondary: Colors.black.withOpacity(0.6),
+      onPrimary: Colors.white.withOpacity(.8),
     ),
-    textTheme: const TextTheme(
-      displaySmall: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15),
+    textTheme: TextTheme(
+      bodySmall: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15),
+      displaySmall: TextStyle(color: Colors.black.withOpacity(0.8), fontWeight: FontWeight.normal, fontSize: 15),
+      displayMedium: TextStyle(color: Colors.black.withOpacity(0.8), fontWeight: FontWeight.normal, fontSize: 18),
     ),
     iconTheme: const IconThemeData(
-      color: Colors.white,
+      color: Colors.black,
     ),
     inputDecorationTheme: const InputDecorationTheme(
       border: InputBorder.none,
@@ -71,7 +88,7 @@ class Themes {
     ),
     snackBarTheme: SnackBarThemeData(
       backgroundColor: Colors.white.withOpacity(.6),
-      contentTextStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15),
+      contentTextStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15),
     ),
   );
 }

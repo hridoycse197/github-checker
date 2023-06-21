@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../controller/data_controller.dart';
-import '../../../widgets/custom_space_widget.dart';
 import '../../../widgets/custom_text_widget.dart';
 
 class GridWidget extends StatelessWidget {
@@ -15,121 +14,35 @@ class GridWidget extends StatelessWidget {
             primary: false,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: 0.7, crossAxisSpacing: 4, mainAxisSpacing: 4),
+                crossAxisCount: 2, childAspectRatio: 1.6, crossAxisSpacing: 4, mainAxisSpacing: 4),
             shrinkWrap: true,
             children: dataC.repositorySearchedList
-                .map((element) => Container(
-                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                      decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
-                      width: Get.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CustomTextWidget(
-                            text: 'Name: ${element.name ?? 'N/A'}',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          Spacevertical(vertical: 5),
-                          CustomTextWidget(
-                            text: 'Description: ${element.description ?? 'N/A'}',
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                          ),
-                          Spacevertical(vertical: 5),
-                          CustomTextWidget(
-                            text: 'Updated At: ${element.updatedAt != null ? element.updatedAt!.toString().split(' ')[0] : 'N/A'}',
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                          ),
-                          Spacevertical(vertical: 5),
-                          CustomTextWidget(
-                            text: 'Visibility:  ${element.visibility ?? 'N/A'}',
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                          ),
-                          Spacevertical(vertical: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/stagers.png'))),
-                                  ),
-                                  CustomTextWidget(
-                                    text: '${element.stargazersCount ?? 0}',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ],
+                .map((element) => Card(
+                      elevation: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: CircleAvatar(
+                                backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                                child: CustomTextWidget(text: element.name![0].toString().toUpperCase()),
                               ),
-                              Spacehorizontal(horizontal: 4),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/forks.png'))),
-                                  ),
-                                  CustomTextWidget(
-                                    text: '${element.forks ?? 0}',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ],
-                              ),
-                              Spacehorizontal(horizontal: 4),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/open_issues.png'))),
-                                  ),
-                                  CustomTextWidget(
-                                    text: '${element.openIssuesCount ?? 0}',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ],
-                              ),
-                              Spacehorizontal(horizontal: 4),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/issues.png'))),
-                                  ),
-                                  CustomTextWidget(
-                                    text: '${element.openIssues ?? 0}',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ],
-                              ),
-                              Spacehorizontal(horizontal: 4),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    size: 20,
-                                    Icons.visibility,
-                                    color: Colors.black,
-                                  ),
-                                  CustomTextWidget(
-                                    text: '${element.watchersCount ?? 0}',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
+                            ),
+                            CustomTextWidget2(
+                              text: element.name ?? 'N/A',
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            CustomTextWidget2(
+                              text: element.language ?? 'N/A',
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ],
+                        ),
                       ),
                     ))
                 .toList())

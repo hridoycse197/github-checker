@@ -14,57 +14,108 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          GestureDetector(
-              onTap: () {
-                Themeservices().ChangeThemeMode();
-              },
-              child: const Icon(Icons.light_mode)),
-          Spacehorizontal(horizontal: 20)
-        ],
-      ),
+      resizeToAvoidBottomInset: false,
+      extendBodyBehindAppBar: false,
       body: SafeArea(
-          child: Center(
-              child: Obx(
-        () => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Themeservices().isSavedDarkMode() ? Image.asset('assets/light.gif') : Image.asset('assets/light.gif'),
-            Spacevertical(vertical: 20),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).colorScheme.primaryContainer,
+        child: Obx(
+          () => Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(
+                flex: 2,
+                fit: FlexFit.loose,
+                child: Container(
+                    color: Theme.of(context).colorScheme.primary,
+                    child: Stack(children: [
+                      Positioned(
+                        right: 5,
+                        top: 4,
+                        child: GestureDetector(
+                            onTap: () {
+                              Themeservices().changeThemeMode();
+                            },
+                            child: const Icon(Icons.light_mode)),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(500)),
+                          color: Theme.of(context).colorScheme.background,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Column(
+                            children: [
+                              Spacevertical(vertical: kToolbarHeight),
+
+                              //mainAxisAlignment: MainAxisAlignment.start,
+
+                              Themeservices().isSavedDarkMode() ? Image.asset('assets/light.gif') : Image.asset('assets/dark.gif'),
+                            ],
+                          ),
+                        ),
+                      )
+                    ])),
               ),
-              width: Get.width * .9,
-              height: 50,
-              padding: const EdgeInsets.only(left: 4),
-              child: TextFormField(
-                onChanged: dataC.onChanged,
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.displaySmall!.color,
-                ),
-              ),
-            ),
-            Spacevertical(vertical: 20),
-            dataC.loginLoading.value
-                ? CircularProgressIndicator(
-                    color: Theme.of(context).colorScheme.primaryContainer,
+              Flexible(
+                  flex: 5,
+                  fit: FlexFit.loose,
+                  child: Container(
+                      alignment: Alignment.center,
+                      color: Theme.of(context).colorScheme.primary,
+                      child: Stack(children: [
+                        Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.background,
+                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(500)),
+                            ),
+                            child: Column(
+                              children: [
+                                Spacevertical(vertical: 100),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: [BoxShadow(color: Colors.grey, spreadRadius: 1, blurRadius: 5, offset: Offset(1, 2))],
+                                    //  borderRadius: BorderRadius.circular(10),
+                                    color: Theme.of(context).colorScheme.onBackground,
+                                  ),
+                                  width: Get.width * .7,
+                                  height: 50,
+                                  padding: const EdgeInsets.only(left: 4),
+                                  child: TextFormField(
+                                    onChanged: dataC.onChanged,
+                                    style: TextStyle(
+                                      color: Theme.of(context).textTheme.displaySmall!.color,
+                                    ),
+                                  ),
+                                ),
+                                Spacevertical(vertical: 20),
+                                dataC.loginLoading.value
+                                    ? CircularProgressIndicator(
+                                        color: Theme.of(context).colorScheme.primaryContainer,
+                                      )
+                                    : ElevatedButton.icon(
+                                        onPressed: () {
+                                          if (dataC.onChanged != '') {
+                                            dataC.submitUser(dataC.onChanged.value);
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(content: CustomTextWidget(text: 'Please Type username')));
+                                          }
+                                        },
+                                        icon: const Icon(Icons.login),
+                                        label: CustomTextWidget(text: 'Login')),
+                              ],
+                            ))
+                      ]))
+                  //====================== Body Section Start======================
                   )
-                : ElevatedButton.icon(
-                    onPressed: () {
-                      if (dataC.onChanged != '') {
-                        dataC.submitUser(dataC.onChanged.value);
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: CustomTextWidget(text: 'Please Type username')));
-                      }
-                    },
-                    icon: const Icon(Icons.login),
-                    label: CustomTextWidget(text: 'Login')),
-          ],
+            ],
+          ),
         ),
-      ))),
+      ),
     );
   }
 }

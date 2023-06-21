@@ -14,7 +14,7 @@ class Themeservices {
     getstorage.write(storageKey, isDarkMode);
   }
 
-  void ChangeThemeMode() {
+  void changeThemeMode() {
     Get.changeThemeMode(isSavedDarkMode() ? ThemeMode.light : ThemeMode.dark);
     saveThemeMode(!isSavedDarkMode());
   }
